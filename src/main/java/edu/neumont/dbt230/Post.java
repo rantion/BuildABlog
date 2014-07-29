@@ -1,6 +1,9 @@
 package edu.neumont.dbt230;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.PriorityQueue;
 
@@ -8,13 +11,16 @@ public class Post implements Comparable {
 
 	private User poster;
 	private long postTime;
+	private Date date;
 	private String postContent;
 	private PriorityQueue<Comment> comments;
 	
 	public Post(User poster, String postContent){
 		this.poster = poster;
-		this.postTime = Calendar.getInstance().getTimeInMillis();
+		date = new Date();
+		this.postTime =Calendar.getInstance().getTimeInMillis();
 		this.postContent = postContent;
+		comments = new PriorityQueue<Comment>();
 	}
 	
 	public void addComment(Comment comment){
@@ -55,7 +61,7 @@ public class Post implements Comparable {
 	}
 
 	public String toString(){
-		return "Poster: "+poster+" PostTime: "+postTime+" Post: "+postContent+"\n"+
+		return "Poster: "+poster+" PostTime: "+new Timestamp(date.getTime())+" Post: "+postContent+"\n"+
 				"Comments: "+comments+"\n";
 	}
 	

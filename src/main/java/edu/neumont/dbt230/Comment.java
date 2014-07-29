@@ -1,5 +1,6 @@
 package edu.neumont.dbt230;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -7,12 +8,15 @@ public class Comment implements Comparable {
 	
 	private User poster;
 	private long postTime;
+	private Date date;
+	private String post_Time;
 	private String comment;
 	
 	public Comment(User poster, String comment){
 		this.poster = poster;
-		this.postTime = Calendar.getInstance().getTimeInMillis();
-		this.comment = comment;		
+		date = new Date();
+		this.postTime =Calendar.getInstance().getTimeInMillis();
+		this.comment = comment;	
 	}
 	
 	
@@ -53,7 +57,7 @@ public class Comment implements Comparable {
 
 
 	public String toString(){
-		return "Poster: "+poster+" PostTime: "+postTime+" Comment: "+comment+"\n";
+		return "Poster: "+poster+" PostTime: "+new Timestamp(date.getTime())+" Comment: "+comment+"\n";
 	}
 	
 	public String toJson(){
