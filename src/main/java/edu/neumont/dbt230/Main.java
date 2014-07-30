@@ -10,24 +10,6 @@ public class Main {
 	private static Blog blog = new Blog();
     public static void main(String[] args) {
 
-    	User rachel = new User("rantion", "password");
-    	User jon = new User("jon","password");
-    	User caleb = new User("caleb", "password");
-    	User glenn = new User("glenn", "password");
-    	
-    	blog.addUser(rachel);
-    	blog.addUser(jon);
-    	blog.addUser(caleb);
-    	blog.addUser(glenn);
-    	
-    	Post post = new Post(rachel, "This is a post");
-    	Post post1 = new Post(jon, "This is another post");
-    	Comment comment = new Comment(rachel, "comment");
-    	post.addComment(comment);
-    	
-    	blog.addPost(post);
-    	blog.addPost(post1);
-    	
     	User user = getUser();
     	while(true){
     	getOption(user);
@@ -43,14 +25,17 @@ public class Main {
     	System.out.println("Enter 2 to make a post");
     	System.out.println("Enter 3 to comment on a post");
     	System.out.println("Enter 4 to exit");
-    	String option = scan.next();
+    	String option = scan.nextLine();
     	if(option.equals("1")){
     		blog.showPosts();
     	}
     	else if(option.equals("2")){
-    		System.out.println("Enter your post: \n");
+            System.out.print("Enter post title: ");
+            String postTitle = scan.nextLine();
+
+            System.out.print("Enter your post: ");
     		String postContent = scan.nextLine();
-    		Post post = new Post(user, postContent);
+    		Post post = new Post(user, postTitle, postContent);
     		blog.addPost(post);
     	}
     	else if(option.equals("3")){

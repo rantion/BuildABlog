@@ -8,23 +8,26 @@ import java.util.PriorityQueue;
 public class Blog {
 	List<User> users;
 	PriorityQueue<Post> posts;
-	
-	public Blog(){
+	private CassandraInteraction cassandra;
+
+    public Blog(){
 		this.users = new ArrayList<User>();
 		posts = new PriorityQueue<Post>();
+        cassandra = new CassandraInteraction();
 	}
 	
 	public void addUser(User user){
-		users.add(user);
+		cassandra.addUser(user);
 	}
 	
 	public void addPost(Post post){
-		posts.add(post);
+		cassandra.addPost(post);
 	}
 	
 	public List<Post> getPosts(){
 		List<Post>_posts = new ArrayList<Post>();
-		Iterator it = posts.iterator();
+		posts = cassandra.getAllPosts();
+        Iterator it = posts.iterator();
 		while(it.hasNext()){
 			Post post = (Post)it.next();
 			_posts.add(post);
@@ -33,13 +36,14 @@ public class Blog {
 	}
 	
 	public void showPosts(){
+        posts = cassandra.getAllPosts();
 		for(Post post: posts){
 			System.out.println(post);
 		}
 	}
 	
 	public List<User> getUsers(){
-		return users;
+		return cassandra.getAllUsers();
 	}
 	
 	public String toJson(){

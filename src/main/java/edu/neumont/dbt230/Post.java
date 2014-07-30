@@ -12,16 +12,35 @@ public class Post implements Comparable {
 	private User poster;
 	private long postTime;
 	private Date date;
+    private String title;
 	private String postContent;
 	private PriorityQueue<Comment> comments;
 	
-	public Post(User poster, String postContent){
+	public Post(User poster, String title, String postContent){
 		this.poster = poster;
+        this.title = title;
 		date = new Date();
 		this.postTime =Calendar.getInstance().getTimeInMillis();
 		this.postContent = postContent;
 		comments = new PriorityQueue<Comment>();
 	}
+
+    public Post(User poster, String title, String postContent, Date date) {
+        this.poster = poster;
+        this.date = date;
+        this.title = title;
+        this.postContent = postContent;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Date getTimeStamp() {
+        return date;
+    }
+
+
 	
 	public void addComment(Comment comment){
 		comments.add(comment);
